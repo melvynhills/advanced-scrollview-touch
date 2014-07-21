@@ -35,6 +35,7 @@ class ScrollView < UIScrollView
 
   def hitTest(point, withEvent:event)
     hitView = super
+    # let direct touches go through this view
     if hitView == self
       return nil
     end

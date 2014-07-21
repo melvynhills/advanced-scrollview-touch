@@ -8,10 +8,6 @@ class RootController < BaseController
     true
   end
 
-  def viewDidLoad
-    super
-  end
-
   def viewDidAppear(animated)
     super
     addDots
@@ -33,6 +29,7 @@ class RootController < BaseController
   end
 
   def setupGestures
+    # steal the scrollview pan gesture and add it to the main view
     view.addGestureRecognizer(view.scrollView.panGestureRecognizer)
 
     # mimic UIScrollView.delayContentTouches behavior on a regular view
