@@ -18,8 +18,9 @@ class DotsView < BaseView
     addSubview(dot)
   end
 
-  def arrangeDotsRandomly
+  def rearrangeDotsRandomly
     # rearrange randomly
+
     subviews.each do |dot|
       x = rand(width)
       y = rand(height)
@@ -27,7 +28,9 @@ class DotsView < BaseView
     end
   end
 
-  def arrangeDotsNeatly
+  def rearrangeDotsNeatly
+    # rearrange into grid
+
     rx = 0
     ry = 0
 
@@ -46,8 +49,17 @@ class DotsView < BaseView
     end
   end
 
-  def rearrangeDotsNeatly
-    # rearrange into grid
+  def rearrangeDotsNeatlyWithAnimation
+    detectDotsGrid
+
+    UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping:0.7, initialSpringVelocity:1.0, options:UIViewAnimationOptionCurveEaseInOut, animations:->{
+      rearrangeDotsNeatly
+    }, completion:nil)
+  end
+
+  def detectDotsGrid
+    # detect grid based on current dots
+
     dots = subviews.mutableCopy
     newDots = []
 
@@ -75,21 +87,6 @@ class DotsView < BaseView
 
     newDots.each do |dot|
       addSubview(dot)
-    end
-
-    arrangeDotsNeatly
-  end
-
-  def rearrangeDotsNeatlyWithAnimation
-    UIView.animateWithDuration(0.5, delay:0.0, usingSpringWithDamping:0.7, initialSpringVelocity:1.0, options:UIViewAnimationOptionCurveEaseInOut, animations:->{
-      rearrangeDotsNeatly
-    }, completion:nil)
-  end
-
-  def dotView
-    @dotView ||= begin
-      _view = DotView.new
-      _view
     end
   end
 

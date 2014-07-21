@@ -1,7 +1,5 @@
 class RootController < BaseController
 
-  # View management
-
   def loadView
     self.view = RootView.new
   end
@@ -26,16 +24,15 @@ class RootController < BaseController
     20.times do
       view.dotsView.addDot
     end
-    view.dotsView.arrangeDotsRandomly
+    view.dotsView.rearrangeDotsRandomly
 
     20.times do
       view.scrollView.dotsView.addDot
     end
-    view.scrollView.dotsView.arrangeDotsNeatly
+    view.scrollView.dotsView.rearrangeDotsNeatly
   end
 
   def setupGestures
-    # view.scrollView.panGestureRecognizer.cancelsTouchesInView = false
     view.addGestureRecognizer(view.scrollView.panGestureRecognizer)
 
     # mimic UIScrollView.delayContentTouches behavior on a regular view
@@ -49,9 +46,9 @@ class RootController < BaseController
   def setupDotsGesturesForView(dotsView)
     dotsView.subviews.each do |dot|
       longPressGestureRecognizer = UILongPressGestureRecognizer.alloc.initWithTarget(self, action:"dotWasLongPressed:")
-      # prevent long press to cancel current touch state
+      # prevent long press canceling current touch state
       longPressGestureRecognizer.cancelsTouchesInView = false
-      longPressGestureRecognizer.minimumPressDuration = 0.2
+      longPressGestureRecognizer.minimumPressDuration = 0.3
       longPressGestureRecognizer.delegate = self
       dot.addGestureRecognizer(longPressGestureRecognizer)
     end

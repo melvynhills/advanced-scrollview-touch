@@ -1,7 +1,5 @@
 class UIColor
 
-  # utils
-
   def getHSBA
     h = Pointer.new(:float)
     s = Pointer.new(:float)

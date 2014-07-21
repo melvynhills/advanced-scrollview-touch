@@ -58,10 +58,6 @@ class DotView < BaseView
     setHighlighted(true)
   end
 
-  def touchesMoved(touches, withEvent:event)
-    super
-  end
-
   def touchesEnded(touches, withEvent:event)
     super
     setHighlighted(false)
